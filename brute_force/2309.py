@@ -33,37 +33,36 @@
 
 #dwarfs = [20, 7, 23, 19, 10, 15, 25, 8, 13]
 
-dwarfs = []
+input_dwarfs = []
+
 for i in range(9):
-    dwarfs.append(int(input()))
+    input_dwarfs.append(int(input()))
 
-
-index_set = []
 def check_sum(index_set):
     sum_of_heights = 0
     for i in index_set:
-        sum_of_heights += dwarfs[i]
+        sum_of_heights += input_dwarfs[i]
     if sum_of_heights == 100 :
         return True
     else :
         return False
 
-def loop(size_count, max_number):
-    if (size_count > 0):
+index_set = []
+def create_index_set(list_size, max_number):
+    if (list_size > 0):
         for i in range(max_number):
             if i not in index_set:
                 index_set.append(i)
                 if len(index_set) == 7:
                     if check_sum(index_set) == True:
                         return index_set
-                loop(size_count-1, max_number)
+                create_index_set(list_size-1, max_number)
                 index_set.pop()
 
+output_dwarfs = []
+for index in create_index_set(7,9):
+    output_dwarfs.append(input_dwarfs[index])
 
-dwarf_set = []
-for index in loop(7,9):
-    dwarf_set.append(dwarfs[index])
-
-for dwarf in sorted(dwarf_set):
+for dwarf in sorted(output_dwarfs):
     print(dwarf)
     
